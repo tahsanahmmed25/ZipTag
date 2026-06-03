@@ -1,7 +1,7 @@
 {
   "name": "ziptag",
   "private": true,
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A fast, polished offline desktop archiver.",
   "type": "module",
   "scripts": {
