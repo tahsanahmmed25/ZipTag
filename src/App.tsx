@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   Circle,
   Download,
-  FileArchive,
   Folder,
   GitBranch,
   Info,
@@ -41,6 +40,31 @@ import {
 import { runSilentUpdateCheck } from "@/lib/updater";
 import { cn, formatBytes, formatDuration } from "@/lib/utils";
 import { useJobStore, type ZipTagJob } from "@/store/jobs";
+
+function FileArchive({ size = 24, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+      <polyline points="13 2 13 9 20 9" />
+      <line x1="12" y1="12" x2="12" y2="19" />
+      <line x1="9.5" y1="13" x2="12" y2="13" />
+      <line x1="12" y1="14.5" x2="14.5" y2="14.5" />
+      <line x1="9.5" y1="16" x2="12" y2="16" />
+      <line x1="12" y1="17.5" x2="14.5" y2="17.5" />
+    </svg>
+  );
+}
 
 type ActiveView = "compress" | "extract" | "queue" | "about" | "themes";
 type ThemeId = "teal-clarity" | "slate-mono" | "indigo-focus" | "amber-warmth";
