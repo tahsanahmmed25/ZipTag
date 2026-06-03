@@ -893,11 +893,20 @@ pub fn run() {
             {
                 use tauri::Manager;
                 if let Some(win) = app.get_webview_window("main") {
-                    let _ = win.set_focus();
-                    let win_clone = win.clone();
+                    // Safety net: guarantee the window becomes visible after 500ms
+                    // even if the JS getCurrentWindow().show() call fails silently
+                    // (e.g. if React errors before useEffect fires on first launch).
+                    let win_show = win.clone();
+                    let win_focus = win.clone();
                     std::thread::spawn(move || {
-                        std::thread::sleep(std::time::Duration::from_millis(100));
-                        let _ = win_clone.set_focus();
+                        std::thread::sleep(std::time::Duration::from_millis(500));
+                        let _ = win_show.show();
+                        let _ = win_show.set_focus();
+                    });
+                    // Also request focus after a short delay for the mouse-click fix.
+                    std::thread::spawn(move || {
+                        std::thread::sleep(std::time::Duration::from_millis(650));
+                        let _ = win_focus.set_focus();
                     });
                 }
             }

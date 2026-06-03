@@ -19,6 +19,18 @@
         } catch(e) {}
       })();
     </script>
+    <script type="module">
+      import { getCurrentWindow } from '@tauri-apps/api/window';
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          if (window.__TAURI_INTERNALS__) {
+            await getCurrentWindow().show();
+          }
+        } catch(e) {
+          console.error('Window show failed:', e);
+        }
+      });
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
