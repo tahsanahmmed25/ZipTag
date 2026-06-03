@@ -88,7 +88,7 @@ const pages = [
   });
 
   console.log(`Navigating to http://localhost:${PORT}/ ...`);
-  await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'load' });
+  await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'load', timeout: 60000 });
 
   for (const theme of themes) {
     for (const mode of modes) {
@@ -102,7 +102,7 @@ const pages = [
       }, theme.id, mode === 'dark');
       
       // Reload to apply theme & mode safely
-      await page.reload({ waitUntil: 'load' });
+      await page.reload({ waitUntil: 'load', timeout: 60000 });
       await wait(1000); // Wait for React app to mount and apply styles
 
       // Seed the Zustand jobs store with mock items for a realistic UI look

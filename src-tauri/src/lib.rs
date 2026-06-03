@@ -888,6 +888,20 @@ pub fn run() {
             #[cfg(desktop)]
             app.handle()
                 .plugin(tauri_plugin_updater::Builder::new().build())?;
+
+            #[cfg(desktop)]
+            {
+                use tauri::Manager;
+                if let Some(win) = app.get_webview_window("main") {
+                    let _ = win.set_focus();
+                    let win_clone = win.clone();
+                    std::thread::spawn(move || {
+                        std::thread::sleep(std::time::Duration::from_millis(100));
+                        let _ = win_clone.set_focus();
+                    });
+                }
+            }
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
