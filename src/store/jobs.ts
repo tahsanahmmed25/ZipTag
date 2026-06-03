@@ -21,6 +21,8 @@ export type ZipTagJob = {
 
 type JobState = {
   jobs: ZipTagJob[];
+  appVersion: string;
+  setAppVersion: (version: string) => void;
   addJob: (job: ZipTagJob) => void;
   applyProgress: (progress: BackendProgress) => void;
   completeJob: (jobId: string, report: ArchiveJobReport) => void;
@@ -30,6 +32,8 @@ type JobState = {
 
 export const useJobStore = create<JobState>((set) => ({
   jobs: [],
+  appVersion: "...",
+  setAppVersion: (appVersion) => set({ appVersion }),
   addJob: (job) => set((state) => ({ jobs: [job, ...state.jobs] })),
   applyProgress: (progress) =>
     set((state) => ({

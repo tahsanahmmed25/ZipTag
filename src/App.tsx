@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { getVersion } from "@tauri-apps/api/app";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import {
@@ -89,7 +90,7 @@ function App() {
   const [extractPassword, setExtractPassword] = useState("");
   // "compress" | "extract" | null — set when launched from OS context menu
   const [quickMode, setQuickMode] = useState<{ mode: string; paths: string[] } | null>(null);
-  const { jobs, addJob, applyProgress, completeJob, failJob, clearCompleted } = useJobStore();
+  const { jobs, addJob, applyProgress, completeJob, failJob, clearCompleted, setAppVersion } = useJobStore();
 
   const recentReport = useMemo(() => [...jobs].reverse().find((job) => job.report)?.report, [jobs]);
 
@@ -107,8 +108,11 @@ function App() {
     if (isTauriRuntime()) {
       void runSilentUpdateCheck(setUpdateMessage);
       void getCurrentWindow().show();
+      getVersion().then((v) => setAppVersion(`v${v}`)).catch(() => setAppVersion("v0.2.3"));
+    } else {
+      setAppVersion("v0.2.3-web");
     }
-  }, []);
+  }, [setAppVersion]);
 
   useEffect(() => {
     if (!isTauriRuntime()) return;
@@ -638,6 +642,8 @@ function QueueView({
 }
 
 function AboutView() {
+  const appVersion = useJobStore((state) => state.appVersion);
+
   return (
     <section className="about-layout">
       <div className="about-card">
@@ -647,7 +653,7 @@ function AboutView() {
           </div>
           <div>
             <div className="about-app-name">
-              ZipTag <span className="about-version">v0.1.0</span>
+              ZipTag <span className="about-version">{appVersion}</span>
             </div>
             <div className="about-tagline">A fast, polished offline desktop archiver.</div>
           </div>
@@ -756,6 +762,8 @@ function PageHeader({
   subtitle: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
 }) {
+  const appVersion = useJobStore((state) => state.appVersion);
+
   return (
     <div className="page-header-wrap">
       <div className="page-header">
@@ -765,7 +773,7 @@ function PageHeader({
         </div>
         <div className="page-subtitle">{subtitle}</div>
       </div>
-      <span className="version-badge">v0.1.0</span>
+      <span className="version-badge">{appVersion}</span>
     </div>
   );
 }
