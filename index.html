@@ -1,6 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        background: #111111;
+      }
+    </style>
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('ziptag_theme') || 'slate-mono';
+          var dark = localStorage.getItem('ziptag_dark') !== 'false';
+          var bg = dark ? '#111111' : '#f7f7f7';
+          document.documentElement.style.background = bg;
+          document.body && (document.body.style.background = bg);
+        } catch(e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

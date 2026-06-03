@@ -106,6 +106,7 @@ function App() {
   useEffect(() => {
     if (isTauriRuntime()) {
       void runSilentUpdateCheck(setUpdateMessage);
+      void getCurrentWindow().show();
     }
   }, []);
 

@@ -18,7 +18,9 @@
         "minWidth": 720,
         "minHeight": 480,
         "decorations": false,
-        "focus": true
+        "focus": true,
+        "visible": false,
+        "backgroundColor": "#111111"
       }
     ],
     "security": {
