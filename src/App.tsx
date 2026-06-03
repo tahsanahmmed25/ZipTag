@@ -40,6 +40,10 @@ import {
 import { runSilentUpdateCheck } from "@/lib/updater";
 import { cn, formatBytes, formatDuration } from "@/lib/utils";
 import { useJobStore, type ZipTagJob } from "@/store/jobs";
+if (typeof window !== "undefined") {
+  (window as any).useJobStore = useJobStore;
+}
+
 
 function FileArchive({ size = 24, className }: { size?: number; className?: string }) {
   return (
