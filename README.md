@@ -1,8 +1,4 @@
-<p align="center">
-  
 # ZipTag
-
-</p>
 
 <p align="center">
   <strong>ZipTag — A fast, polished, fully offline desktop archiver.</strong>
