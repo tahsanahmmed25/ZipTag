@@ -1,6 +1,6 @@
 [package]
 name = "ziptag"
-version = "0.2.1"
+version = "0.2.2"
 description = "A fast, polished offline desktop archiver."
 authors = ["Tahsan"]
 edition = "2021"
