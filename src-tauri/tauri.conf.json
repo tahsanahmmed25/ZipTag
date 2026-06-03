@@ -1,0 +1,110 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "ZipTag",
+  "version": "0.1.0",
+  "identifier": "com.ziptag.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "ZipTag",
+        "width": 860,
+        "height": 560,
+        "minWidth": 720,
+        "minHeight": 480,
+        "decorations": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "windows": {
+      "nsis": {
+        "installerHooks": "nsis/hooks.nsi"
+      }
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "fileAssociations": [
+      {
+        "ext": ["zip"],
+        "name": "ZIP Archive",
+        "role": "Viewer",
+        "mimeType": "application/zip"
+      },
+      {
+        "ext": ["7z"],
+        "name": "7-Zip Archive",
+        "role": "Viewer",
+        "mimeType": "application/x-7z-compressed"
+      },
+      {
+        "ext": ["rar"],
+        "name": "RAR Archive",
+        "role": "Viewer",
+        "mimeType": "application/vnd.rar"
+      },
+      {
+        "ext": ["iso"],
+        "name": "ISO Disk Image",
+        "role": "Viewer",
+        "mimeType": "application/x-cd-image"
+      },
+      {
+        "ext": ["tar"],
+        "name": "TAR Archive",
+        "role": "Viewer",
+        "mimeType": "application/x-tar"
+      },
+      {
+        "ext": ["gz"],
+        "name": "GZIP Archive",
+        "role": "Viewer",
+        "mimeType": "application/gzip"
+      },
+      {
+        "ext": ["xz"],
+        "name": "XZ Archive",
+        "role": "Viewer",
+        "mimeType": "application/x-xz"
+      },
+      {
+        "ext": ["bz2"],
+        "name": "Bzip2 Archive",
+        "role": "Viewer",
+        "mimeType": "application/x-bzip2"
+      },
+      {
+        "ext": ["zst"],
+        "name": "Zstandard Archive",
+        "role": "Viewer",
+        "mimeType": "application/zstd"
+      }
+    ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJGNTIyQjFGRjZDMzFEMUYKUldRZkhjUDJIeXRTTC90VFlGc0Y3SDFXcmI5ZjJoSWIySGgwR0JDTk9iWHVnYk16QTk4SE9WUUMK",
+      "endpoints": [
+        "https://github.com/tahsanahmmed25/ZipTag/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

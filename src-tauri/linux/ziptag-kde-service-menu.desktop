@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/zip;application/x-7z-compressed;application/x-rar-compressed;application/x-tar;application/gzip;application/x-xz;application/x-bzip2;application/zstd;application/x-cd-image;inode/directory;application/octet-stream;
+Actions=ZipTagCompress;ZipTagExtract;
+X-KDE-Submenu=ZipTag
+
+[Desktop Action ZipTagCompress]
+Name=Compress with ZipTag
+Icon=package-x-generic
+Exec=ziptag --quick-compress %F
+
+[Desktop Action ZipTagExtract]
+Name=Extract with ZipTag
+Icon=package-x-generic
+Exec=ziptag --quick-extract %f
